@@ -44,3 +44,40 @@
         </div>
     </div>
 </div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header bg-success text-white">
+                <h4 class="mb-0">CSV Export</h4>
+            </div>
+            <div class="card-body">
+                <p>Download the games catalog as a CSV file for spreadsheet analysis.</p>
+                <form method="post">
+                    <button type="submit" asp-page-handler="ExportCsv" class="btn btn-outline-success">Download CSV</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header bg-danger text-white">
+                <h4 class="mb-0">XML Ranking</h4>
+            </div>
+            <div class="card-body">
+                <p>Generate an XML file with the games ordered by Score (descending).</p>
+                <form method="post">
+                    <button type="submit" asp-page-handler="GenerateXml" class="btn btn-outline-danger">Generate XML Ranking</button>
+                </form>
+                
+                @if (TempData["XmlSuccess"] != null)
+                {
+                    <div class="alert alert-success mt-3 mb-0">
+                        @TempData["XmlSuccess"]
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

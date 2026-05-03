@@ -8,12 +8,17 @@ namespace VideoGameManager.Pages.Files
     {
         private readonly GameService GameService;
         private readonly GameRepository GameRepository;
+        private readonly GamesExporter GamesExporter;
+        private readonly GamesRanking GamesRanking;
         public string[] LogEntries { get; set; } = Array.Empty<string>();
+        public bool XmlGenerated { get; set; } = false;
 
-        public IndexModel(GameService gameService, GameRepository gameRepository)
+        public IndexModel(GameService gameService, GameRepository gameRepository, GamesExporter gamesExporter, GamesRanking gamesRanking)
         {
             GameService = gameService;
             GameRepository = gameRepository;
+            GamesExporter = gamesExporter;
+            GamesRanking = gamesRanking;
         }
 
         public void OnGet()
@@ -39,6 +44,25 @@ namespace VideoGameManager.Pages.Files
         {
             var importedGames = GameRepository.LoadAll();
             GameService.SetAll(importedGames); // Overwrite memory
+            return RedirectToPage();
+        }
+
+        // Execute when click "Export CSV"
+        public IActionResult OnPostExportCsv()
+        {
+            var games = GameService.GetAll();
+            byte[] fileBytes = GamesExporter.ExportToCsv(games);
+            // Return the file for the browser to download
+            return File(fileBytes, "text/csv", "games.csv");
+        }
+
+        // Execute when click "Generate XML"
+        public IActionResult OnPostGenerateXml()
+        {
+            var games = GameService.GetAll();
+            GamesRanking.GenerateRankingXml(games);
+
+            TempData["XmlSuccess"] = "XML Ranking Games generated successfully!";
             return RedirectToPage();
         }
     }

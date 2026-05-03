@@ -8,6 +8,8 @@ builder.Services.AddRazorPages();
 // GameService, Repository afegit
 builder.Services.AddSingleton<GameService>();
 builder.Services.AddSingleton<GameRepository>();
+builder.Services.AddSingleton<GamesExporter>();
+builder.Services.AddSingleton<GamesRanking>();
 
 var app = builder.Build();
 
