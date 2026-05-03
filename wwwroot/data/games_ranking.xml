@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AppConfig>
+  <AppTitle>VideoGame Ranking</AppTitle>
+  <Games>
+    <Game>
+      <id>2</id>
+      <score>9</score>
+      <title>Super Mario Galaxy 2</title>
+      <genre>Acció , aventura</genre>
+      <year>2010</year>
+      <description>Joc de plataformes puzzles</description>
+    </Game>
+    <Game>
+      <id>1</id>
+      <score>8</score>
+      <title>Super Mario Galaxy</title>
+      <genre>Acció , aventura</genre>
+      <year>2007</year>
+      <description>Joc de plataformes</description>
+    </Game>
+  </Games>
+</AppConfig>

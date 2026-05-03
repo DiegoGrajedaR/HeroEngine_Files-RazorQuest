@@ -5,8 +5,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-// GameService afegit
+// GameService, Repository afegit
 builder.Services.AddSingleton<GameService>();
+builder.Services.AddSingleton<GameRepository>();
+builder.Services.AddSingleton<GamesExporter>();
+builder.Services.AddSingleton<GamesRanking>();
 
 var app = builder.Build();
 
