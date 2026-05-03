@@ -5,22 +5,24 @@ namespace VideoGameManager.Services
 {
     public class GameService
     {
-        private readonly List<Game> _games;
-        private int _nextId = 1;
+        private readonly List<Game> GamesList;
+        private int NextId = 1;
 
+        //Constructor
         public GameService()
         {
-            _games = new List<Game>();
+            GamesList = new List<Game>();
         }
 
-        public List<Game> GetAll() => _games;
+        //Methods
+        public List<Game> GetAll() => GamesList;
 
-        public Game? GetById(int id) => _games.FirstOrDefault(g => g.Id == id);
+        public Game? GetById(int id) => GamesList.FirstOrDefault(g => g.Id == id);
 
         public void Add(Game game)
         {
-            game.Id = _nextId++;
-            _games.Add(game);
+            game.Id = NextId++;
+            GamesList.Add(game);
         }
 
         public void Update(Game game)
@@ -41,7 +43,7 @@ namespace VideoGameManager.Services
             var game = GetById(id);
             if (game != null)
             {
-                _games.Remove(game);
+                GamesList.Remove(game);
             }
         }
     }
