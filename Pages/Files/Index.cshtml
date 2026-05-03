@@ -1,0 +1,46 @@
+﻿@page
+@model VideoGameManager.Pages.Files.IndexModel
+@{
+}
+
+<h1>Files & Persistence</h1>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">JSON Persistence</h4>
+            </div>
+            <div class="card-body">
+                <p>Save the current memory list to a JSON file, or load it back.</p>
+                <form method="post">
+                    <button type="submit" asp-page-handler="ExportJson" class="btn btn-success">Export to JSON</button>
+                    <button type="submit" asp-page-handler="ImportJson" class="btn btn-warning">Import from JSON</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-dark text-white">
+                <h4 class="mb-0">Activity Log (TXT)</h4>
+            </div>
+            <div class="card-body">
+                <div class="bg-light p-2 border" style="height: 250px; overflow-y: auto; font-family: monospace;">
+                    @if (Model.LogEntries.Length > 0)
+                    {
+                        @foreach (var line in Model.LogEntries)
+                        {
+                            <div>@line</div>
+                        }
+                    }
+                    else
+                    {
+                        <span class="text-muted">No activity recorded yet.</span>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

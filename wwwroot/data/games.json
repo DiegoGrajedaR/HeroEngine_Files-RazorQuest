@@ -1,0 +1,18 @@
+[
+  {
+    "Id": 1,
+    "Title": "Super Mario Galaxy",
+    "Genre": "Acci\u00F3 , aventura",
+    "Year": 2007,
+    "Score": 8,
+    "Description": "Joc de plataformes"
+  },
+  {
+    "Id": 2,
+    "Title": "Super Mario Galaxy 2",
+    "Genre": "Acci\u00F3 , aventura",
+    "Year": 2010,
+    "Score": 9,
+    "Description": "Joc de plataformes puzzles"
+  }
+]
