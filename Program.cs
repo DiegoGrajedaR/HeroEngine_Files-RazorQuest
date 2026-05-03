@@ -1,7 +1,12 @@
+using VideoGameManager.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+// GameService afegit
+builder.Services.AddSingleton<GameService>();
 
 var app = builder.Build();
 
