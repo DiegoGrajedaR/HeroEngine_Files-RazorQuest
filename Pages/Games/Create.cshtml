@@ -2,3 +2,48 @@
 @model VideoGameManager.Pages.Games.CreateModel
 @{
 }
+
+<h1>Create Game</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Game.Title" class="control-label"></label>
+                <input asp-for="Game.Title" class="form-control" />
+                <span asp-validation-for="Game.Title" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Game.Genre" class="control-label"></label>
+                <input asp-for="Game.Genre" class="form-control" />
+                <span asp-validation-for="Game.Genre" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Game.Year" class="control-label"></label>
+                <input asp-for="Game.Year" class="form-control" />
+                <span asp-validation-for="Game.Year" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Game.Score" class="control-label"></label>
+                <input asp-for="Game.Score" class="form-control" />
+                <span asp-validation-for="Game.Score" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Game.Description" class="control-label"></label>
+                <textarea asp-for="Game.Description" class="form-control"></textarea>
+                <span asp-validation-for="Game.Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-page="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
