@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using VideoGameManager.Data;
 using VideoGameManager.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,10 @@ builder.Services.AddSingleton<GameService>();
 builder.Services.AddSingleton<GameRepository>();
 builder.Services.AddSingleton<GamesExporter>();
 builder.Services.AddSingleton<GamesRanking>();
+
+// DbContext service afegit per treballar amb EntityFramework
+builder.Services.AddDbContext<GameStoreContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
