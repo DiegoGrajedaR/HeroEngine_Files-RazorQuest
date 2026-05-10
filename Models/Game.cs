@@ -26,7 +26,10 @@ namespace VideoGameManager.Models
         // Clau forània cap a Developer
         public int DeveloperId { get; set; }
 
-        // Propietat de navegació
+        //Nova propietat opcional
+        public string? Platform { get; set; }
+
+        // Propietat de navegació (No es veu a la taula)
         public Developer? Developer { get; set; }
 
     }
