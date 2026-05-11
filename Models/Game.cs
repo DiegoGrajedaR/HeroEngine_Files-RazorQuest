@@ -21,6 +21,7 @@ namespace VideoGameManager.Models
         [Range(0, 10, ErrorMessage = "La puntuació ha de ser entre 0 i 10")]
         public double Score { get; set; }
 
+        [Required(ErrorMessage = "La descripció és obligatoria")]
         public string Description { get; set; } = string.Empty;
 
         // Clau forània cap a Developer
