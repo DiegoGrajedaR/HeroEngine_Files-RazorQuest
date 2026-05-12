@@ -17,6 +17,7 @@
             <th>Genre</th>
             <th>Year</th>
             <th>Score</th>
+            <th>Developer</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -28,6 +29,7 @@
                 <td>@game.Genre</td>
                 <td>@game.Year</td>
                 <td>@game.Score</td>
+                <td>@game.Developer?.Name</td>
                 <td>
                     <a asp-page="Details" asp-route-id="@game.Id" class="btn btn-info btn-sm">Details</a>
                     <a asp-page="Edit" asp-route-id="@game.Id" class="btn btn-warning btn-sm">Edit</a>

@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using VideoGameManager.Data;
 using VideoGameManager.Models;
 using VideoGameManager.Services;
 
@@ -7,25 +9,26 @@ namespace VideoGameManager.Pages.Games
 {
     public class DetailsModel : PageModel
     {
-        private readonly GameService GameService;
+        //private readonly GameService GameService;
+        private readonly GameStoreContext _context;
         public Game? Game { get; set; }
 
-        public DetailsModel(GameService gameService)
+        public DetailsModel(GameStoreContext context)
         {
-            GameService = gameService;
+            _context = context;
         }
         
-        public IActionResult OnGet(int id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            // Search game by id
-            Game = GameService.GetById(id);
+            if (id == null) return NotFound();
 
-            // If the game does not exist, return (Not Found) error.
-            if (Game == null)
-            {
-                return NotFound();
-            }
+            var game = await _context.Games
+                .Include(g => g.Developer)
+                .FirstOrDefaultAsync(m => m.Id == id);
 
+            if (game == null) return NotFound();
+
+            Game = game;
             return Page();
         }
     }

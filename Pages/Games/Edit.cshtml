@@ -40,10 +40,19 @@
                 <label asp-for="Game.Description" class="control-label"></label>
                 <textarea asp-for="Game.Description" class="form-control"></textarea>
                 <span asp-validation-for="Game.Description" class="text-danger"></span>
+
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Game.DeveloperId" class="control-label">Developer</label>
+                <select asp-for="Game.DeveloperId" class="form-control" asp-items="Model.DeveloperList">
+                    <option value="">-- Select a Developer --</option>
+                </select>
+                <span asp-validation-for="Game.DeveloperId" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <button type="submit" class="btn btn-primary">Save</button>
                 <a asp-page="./Index" class="btn btn-secondary">Back to List</a>
             </div>
         </form>

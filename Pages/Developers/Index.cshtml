@@ -1,0 +1,39 @@
+﻿@page
+@model VideoGameManager.Pages.Developers.IndexModel
+@{
+}
+
+<h1>Developers</h1>
+
+<p>
+    <a asp-page="Create" class="btn btn-primary">Create New Developer</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Country</th>
+            <th>Founded</th>
+            <th>Games Count</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Developers)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Country</td>
+                <td>@item.FoundedYear</td>
+                <td>
+                    <span class="badge bg-info text-dark">@item.Games.Count</span>
+                </td>
+                <td>
+                    <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

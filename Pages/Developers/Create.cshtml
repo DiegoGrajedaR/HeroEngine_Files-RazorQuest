@@ -1,0 +1,34 @@
+﻿@page
+@model VideoGameManager.Pages.Developers.CreateModel
+@{
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Developer.Name" class="form-label font-weight-bold"></label>
+                <input asp-for="Developer.Name" class="form-control" placeholder="ex. Nintendo, Ubisoft..." />
+                <span asp-validation-for="Developer.Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Developer.Country" class="form-label font-weight-bold"></label>
+                <input asp-for="Developer.Country" class="form-control" placeholder="e.g. Japan, France, USA..." />
+                <span asp-validation-for="Developer.Country" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Developer.FoundedYear" class="control-label"></label>
+                <input asp-for="Developer.FoundedYear" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-page="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>

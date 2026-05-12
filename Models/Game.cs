@@ -5,6 +5,7 @@ namespace VideoGameManager.Models
 {
     public class Game
     {
+        [Key]
         public int Id { get; set; }
 
         [Required(ErrorMessage = "El títol és obligatori")]
@@ -20,7 +21,17 @@ namespace VideoGameManager.Models
         [Range(0, 10, ErrorMessage = "La puntuació ha de ser entre 0 i 10")]
         public double Score { get; set; }
 
+        [Required(ErrorMessage = "La descripció és obligatoria")]
         public string Description { get; set; } = string.Empty;
+
+        // Clau forània cap a Developer
+        public int DeveloperId { get; set; }
+
+        //Nova propietat opcional
+        public string? Platform { get; set; }
+
+        // Propietat de navegació (No es veu a la taula)
+        public Developer? Developer { get; set; }
 
     }
 }

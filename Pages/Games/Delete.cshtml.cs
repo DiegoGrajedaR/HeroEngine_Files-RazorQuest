@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using VideoGameManager.Data;
 using VideoGameManager.Models;
 using VideoGameManager.Services;
 
@@ -7,33 +9,43 @@ namespace VideoGameManager.Pages.Games
 {
     public class DeleteModel : PageModel
     {
-        private readonly GameService _gameService;
+        //private readonly GameService _gameService;
+        private readonly GameStoreContext _context;
 
-        public DeleteModel(GameService gameService)
+        public DeleteModel(GameStoreContext context)
         {
-            _gameService = gameService;
+            _context = context;
         }
 
         [BindProperty]
         public Game Game { get; set; } = default!;
 
-        public IActionResult OnGet(int id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            // Load the game to show it to the user for review.
-            var game = _gameService.GetById(id);
-            if (game == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
+
+            var game = await _context.Games
+                .Include(g => g.Developer)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (game == null) return NotFound();
 
             Game = game;
             return Page();
         }
 
-        public IActionResult OnPost(int id)
+        public async Task<IActionResult> OnPostAsync(int id)
         {
-            // When clicks the "Delete" button, we delete the game and redirect
-            _gameService.Delete(id);
+            if (id == null) return NotFound();
+
+            var game = await _context.Games.FindAsync(id);
+
+            if (game != null)
+            {
+                _context.Games.Remove(game);
+                await _context.SaveChangesAsync();
+            }
+
             return RedirectToPage("./Index");
         }
     }

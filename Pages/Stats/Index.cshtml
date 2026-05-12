@@ -1,0 +1,132 @@
+﻿@page
+@model VideoGameManager.Pages.Stats.IndexModel
+@{
+}
+
+<h1 class="mb-4">Database Statistics & Queries</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        
+        <div class="card mb-4 border-primary">
+            <div class="card-header bg-primary text-white">6.1 Filter by Genre</div>
+            <div class="card-body">
+                <form method="get" class="d-flex mb-3">
+                    <select asp-for="SelectedGenre" asp-items="Model.GenresList" class="form-select me-2">
+                        <option value="">-- Select a Genre --</option>
+                    </select>
+                    <button type="submit" class="btn btn-outline-primary">Filter</button>
+                </form>
+                @if (Model.FilteredGames.Any())
+                {
+                    <ul class="list-group">
+                        @foreach (var game in Model.FilteredGames)
+                        {
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                @game.Title
+                                <span class="badge bg-secondary rounded-pill">@game.Score</span>
+                            </li>
+                        }
+                    </ul>
+                }
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header bg-success text-white">6.2 Top 5 Highest Rated Games</div>
+            <ul class="list-group list-group-flush">
+                @foreach (var game in Model.Top5Games)
+                {
+                    <li class="list-group-item">
+                        <strong>@game.Title</strong> <span class="text-muted">by @game.Developer?.Name</span>
+                        <span class="badge bg-success float-end">@game.Score</span>
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header bg-info text-dark">6.3 Games by Decade</div>
+            <table class="table table-sm mb-0">
+                <thead><tr><th>Decade</th><th>Count</th></tr></thead>
+                <tbody>
+                    @foreach (var stat in Model.GamesByDecade)
+                    {
+                        <tr><td>@stat.Decade's</td><td>@stat.Count</td></tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-header bg-warning text-dark">7.1 Average Score per Developer</div>
+            <table class="table table-sm mb-0">
+                <thead><tr><th>Developer</th><th>Games</th><th>Avg Score</th></tr></thead>
+                <tbody>
+                    @foreach (var dev in Model.AvgByDev)
+                    {
+                        <tr>
+                            <td>@dev.Name</td>
+                            <td>@dev.GameCount</td>
+                            <td>@dev.AvgScore.ToString("0.00")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card mb-4 border-dark">
+            <div class="card-header bg-dark text-white">7.2 Combined Search Filter</div>
+            <div class="card-body">
+                <form method="get" class="row g-2 mb-3">
+                    <div class="col-12">
+                        <input asp-for="TitleFilter" class="form-control" placeholder="Title contains..." />
+                    </div>
+                    <div class="col-6">
+                        <select asp-for="GenreFilter" asp-items="Model.GenresList" class="form-select">
+                            <option value="">-- Any Genre --</option>
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <input asp-for="MinYear" type="number" class="form-control" placeholder="Min Year" />
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-dark w-100">Search</button>
+                    </div>
+                </form>
+                
+                <h6>Results (@Model.SearchResults.Count):</h6>
+                <div style="max-height: 200px; overflow-y: auto;">
+                    <ul class="list-group list-group-flush">
+                        @foreach (var game in Model.SearchResults)
+                        {
+                            <li class="list-group-item py-1">@game.Title <small class="text-muted">(@game.Year)</small></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4 border-danger">
+            <div class="card-header bg-danger text-white">7.3 Productive Developers</div>
+            <div class="card-body">
+                <form method="get" class="d-flex mb-3">
+                    <label class="me-2 align-self-center">More than:</label>
+                    <input asp-for="Threshold" type="number" class="form-control me-2" style="width: 80px;" />
+                    <label class="me-2 align-self-center">games</label>
+                    <button type="submit" class="btn btn-outline-danger">Apply</button>
+                </form>
+                <ul class="list-group">
+                    @foreach (var dev in Model.ProductiveDevs)
+                    {
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            @dev.Name
+                            <span class="badge bg-danger rounded-pill">@dev.Games.Count</span>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
