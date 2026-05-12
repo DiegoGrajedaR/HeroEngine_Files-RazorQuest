@@ -1,0 +1,56 @@
+﻿@page
+@model VideoGameManager.Pages.Developers.DetailsModel
+@{
+}
+
+<h1>Developer Details: @Model.Developer.Name</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">Country</dt>
+        <dd class="col-sm-10">@Model.Developer.Country</dd>
+        <dt class="col-sm-2">Founded Year</dt>
+        <dd class="col-sm-10">@Model.Developer.FoundedYear</dd>
+    </dl>
+
+    <h4 class="mt-4">Games by this Developer</h4>
+    
+    @if (Model.Developer.Games != null && Model.Developer.Games.Any())
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Genre</th>
+                    <th>Year</th>
+                    <th>Score</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var game in Model.Developer.Games)
+                {
+                    <tr>
+                        <td>@game.Title</td>
+                        <td>@game.Genre</td>
+                        <td>@game.Year</td>
+                        <td><span class="badge bg-primary">@game.Score</span></td>
+                        <td>
+                            <a asp-page="/Games/Details" asp-route-id="@game.Id">View Game</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p class="text-muted">This developer has no games registered yet.</p>
+    }
+</div>
+
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Developer.Id" class="btn btn-warning">Edit</a>
+    <a asp-page="./Index" class="btn btn-secondary">Back to List</a>
+</div>
